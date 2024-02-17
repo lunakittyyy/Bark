@@ -39,6 +39,8 @@ namespace Bark.GUI
         public static ConfigEntry<string> SummonInputHand;
         bool docked;
 
+        string[] playerIDS = {"4994748F8B361E31" /*Eve's*/, "62A9914DA7BD2D9B" /*Zaynes*/, "8FECBBC89D69575E" /*Kyles*/};
+
         protected override void Awake()
         {
             Instance = this;
@@ -90,8 +92,13 @@ namespace Bark.GUI
                 };
 
                 Halo halo = gameObject.AddComponent<Halo>();
-                if (PhotonNetwork.LocalPlayer.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString())
-                    modules.Add(halo);
+
+                foreach (string item in playerIDS)
+                {
+                    if (PhotonNetwork.LocalPlayer.UserId == item)
+                        modules.Add(halo);
+                }
+
                 ReloadConfiguration();
             }
             catch (Exception e) { Logging.Exception(e); }
@@ -184,7 +191,7 @@ namespace Bark.GUI
                 helpText = this.gameObject.transform.Find("Help Canvas").GetComponentInChildren<Text>();
                 helpText.text = "Enable a module to see its tutorial.";
                 this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().text =
-                    $"{PluginInfo.Name} {PluginInfo.Version}";
+                    $"{"Bark"} {"1.5.1"}";
 
                 var collider = this.gameObject.GetOrAddComponent<BoxCollider>();
                 collider.isTrigger = true;
