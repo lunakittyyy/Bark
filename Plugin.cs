@@ -213,12 +213,12 @@ namespace Bark
             Cleanup();
         }
 
-        public void JoinLobby(string name, string gamemode)
+        public void JoinLobby(string name)
         {
-            StartCoroutine(JoinLobbyInternal(name, gamemode));
+            StartCoroutine(JoinLobbyInternal(name));
         }
 
-        IEnumerator JoinLobbyInternal(string name, string gamemode)
+        IEnumerator JoinLobbyInternal(string name)
         {
             PhotonNetworkController.Instance.AttemptDisconnect();
             do
@@ -228,9 +228,9 @@ namespace Bark
             }
             while (PhotonNetwork.InRoom);
             
-            string gamemodeCache = GorillaComputer.instance.currentGameMode;
-            Logging.Debug("Changing gamemode from", gamemodeCache, "to", gamemode);
-            GorillaComputer.instance.currentGameMode = gamemode;
+            WatchableStringSO gamemodeCache = GorillaComputer.instance.currentGameMode;
+            Logging.Debug("Changing gamemode from", gamemodeCache, "to", "MODDED_MODDED_CASUALCASUAL");
+            GorillaComputer.instance.currentGameMode.Value = "MODDED_MODDED_CASUALCASUAL";
             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(name);
 
             while (!PhotonNetwork.InRoom)
