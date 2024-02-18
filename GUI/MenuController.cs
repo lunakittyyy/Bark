@@ -37,8 +37,8 @@ namespace Bark.GUI
         public static InputTracker SummonTracker;
         public static ConfigEntry<string> SummonInput;
         public static ConfigEntry<string> SummonInputHand;
-        bool docked;
-        string[] playerIDS = { "MYLhuU5X92g2liGniinViIhz9EKIKJUYQf+eyfG8a18=" /*Eve's*/, "g+r7SshI2XBR91/HoNsI9vXokx7sw2rQjqAn5GyXYFo=" /*Zaynes'*/, "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=" /*Kyle's*/};
+        bool docked;                                                                                                        // squid backed me up on this
+        string[] playerIDS = { "4994748F8B361E31" /*Eve's*/, "62A9914DA7BD2D9B" /*Zaynes'*/, "8FECBBC89D69575E" /*Kyle's*/, "FBE3EE50747CB892" /*luna's ;3*/};
 
         protected override void Awake()
         {
@@ -97,9 +97,7 @@ namespace Bark.GUI
 
                 foreach (string item in playerIDS)
                 {
-                    string decryptedID = item.DecryptString();
-
-                    if (PhotonNetwork.LocalPlayer.UserId == decryptedID)
+                    if (PhotonNetwork.LocalPlayer.UserId == item)
                         modules.Add(halo);
                 }
 
