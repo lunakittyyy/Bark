@@ -191,7 +191,7 @@ namespace Bark.GUI
                 helpText = this.gameObject.transform.Find("Help Canvas").GetComponentInChildren<Text>();
                 helpText.text = "Enable a module to see its tutorial.";
                 this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().text =
-                    $"{"Bark"} {"1.5.1"}";
+                    $"{PluginInfo.Name} {PluginInfo.Version}";
 
                 var collider = this.gameObject.GetOrAddComponent<BoxCollider>();
                 collider.isTrigger = true;
