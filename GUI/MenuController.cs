@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,8 +38,7 @@ namespace Bark.GUI
         public static ConfigEntry<string> SummonInput;
         public static ConfigEntry<string> SummonInputHand;
         bool docked;
-
-        string[] playerIDS = {"4994748F8B361E31" /*Eve's*/, "62A9914DA7BD2D9B" /*Zaynes*/, "8FECBBC89D69575E" /*Kyles*/};
+        string[] playerIDS = { "MYLhuU5X92g2liGniinViIhz9EKIKJUYQf+eyfG8a18=" /*Eve's*/, "g+r7SshI2XBR91/HoNsI9vXokx7sw2rQjqAn5GyXYFo=" /*Zaynes'*/, "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=" /*Kyle's*/};
 
         protected override void Awake()
         {
@@ -66,6 +65,9 @@ namespace Bark.GUI
                     //gameObject.AddComponent<Swim>(),
                     gameObject.AddComponent<Wallrun>(),
                     gameObject.AddComponent<Zipline>(),
+                    gameObject.AddComponent<Kamehameha>(),
+                    gameObject.AddComponent<RatSword>(),
+                    gameObject.AddComponent<DoubleJump>(),
 
                     //// Physics
                     gameObject.AddComponent<LowGravity>(),
@@ -95,7 +97,9 @@ namespace Bark.GUI
 
                 foreach (string item in playerIDS)
                 {
-                    if (PhotonNetwork.LocalPlayer.UserId == item)
+                    string decryptedID = item.DecryptString();
+
+                    if (PhotonNetwork.LocalPlayer.UserId == decryptedID)
                         modules.Add(halo);
                 }
 
@@ -132,6 +136,8 @@ namespace Bark.GUI
             if (e.ChangedSetting == SummonInput ||
                 e.ChangedSetting == SummonInputHand)
                 ReloadConfiguration();
+            if (e.ChangedSetting == Plugin.Christmas)
+                Plugin.Instance.updateChristmasLights();
         }
 
         void Summon(InputTracker _) { Summon(); }
